@@ -3,36 +3,82 @@
 
 <head>
     <meta charset=utf-8/>
-    <link rel="stylesheet" type="text/css" href="style.css">
-
-    <title>TODO: Add short title here</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <title>Baseball Project</title>
 </head>
 
-
 <body>
-
-    <h1>TODO: Add project title here</h1>
-
+    <div class="top">
+        <h1>The MVP Race: MLB Player At-Bat Statistics in the 2022 Season</h1>   
     <div>
-        <h2>Motivation</h2>
-        TODO: Add motivation / use case here 
+    
+    <!-- Row for text -->
+    <div class="row">
+        <div class="column">
+              <!-- introduction -->
+
+          <h2>Introduction</h2>
+          <p>MLB, the top professional baseball league in the world, has been in existence since 1903 and has featured some of the greatest players in baseball history, such as Babe Ruth, Willie Mays, and Derek Jeter. The league is renowned for its long-standing history, intense rivalries, and enthusiastic fan base, with millions of viewers tuning in to watch the games both in-person and on television. The captivating and beloved sport of baseball has won the hearts of fans worldwide with its blend of skill, athleticism, and strategy. Baseball statistics are really important to both fans and coaches. Based on Molly (2018), based on the attendance data of MLB teams from 2001 to 2016, the increase in fan experience and attendance is mostly influenced by the team's performance, in other words, losses and wins. From our perspective, the team's performance positively correlates with team members' performance. Therefore, learning about an individual player's performance or making comparisons between players can help baseball clubs gain a deeper insight into their fans' experience. At the same time, the coach can easily understand the team's performance and make key decisions, such as developing tactics and trading players. Our team aims to develop a pack of simple, clear, and efficient visualizations for MLB players’ statistics. </p>
+          <h2>Motivation</h2>
+          <p>This project is a dashboard for the 2022
+            MLB season that allows users to see how players performed and
+            compare the performance of two players. Our team’s motivation was
+            to create simple and efficient visualizations for MLB players’ statis-
+            tics that enable users to filter, sort, navigate, and compare players.
+            Through our design process, we developed a user-friendly interface
+            that provides convenient access to individual player performance and
+            team performance, highlighting the importance of baseball statistics
+            in supporting fans and coaches. Our dashboard provides an intu-
+            itive way for users to stay informed about player performance and
+            make informed decisions based on data, contributing to a deeper
+            understanding of the game and its players.</p>
+        </div>
+        <div class="column">
+            <h2>Data</h2>
+                          <!-- data with subheadings -->
+
+            <h4>Data Source</h4>
+            <p>Our data comes from the Kaggle dataset, 2022 MLB Player Statistics (https://www.kaggle.com/datasets/vivovinco/2022-mlb-player-stats). This dataset contains the batting statistics for every player that participated in at least one game during the season. The data contains 29 attributes, with 26 of them being statistics, and 987 items, with each being a player. Some players appear multiple times due to changing teams throughout the season. The dataset was scraped from baseball-reference.com. Baseball Reference is a baseball statistic website used by media companies and broadcasters, providing accurate data from the 1888 season to current day.
+            </p>
+            <h4>Possible Ethical Issues and Biases</h4>
+            <p>
+              Baseball statistics are objective measurements of a player's performance on the field. They are based on the actual events during the game, such as hits, runs, and, strikeouts, and are recorded by  professionals. There are even adjustments after games to ensure accuracy.Because baseball statistics are based on actual events that happen on the field, they cannot be biased or unethical. The numbers reflect what occurred during the game and are not influenced by personal opinions, biases, or unethical practices.
+            </p>
+            <h4>Data Quality</h4>
+            <p>The data was usable, but still needed some adjustments. The original data contained non ute-8 characters, which needed to be removed in order to process the data. Additionally, some players were listed multiple times with partial statistics because they played for different teams throughout the season. 
+            </p>
+
+        </div>
+    </div>
+    
+    <!-- Visualizations -->
+    <div class="row">
+        <div class="column">
+          <h2>Vis 1</h2>
+        </div>
+        <div class="column">
+            <h2>Vis 2</h2>
+        </div>
     </div>
 
-    <div>
-        <h2>Background</h2>
-        TODO: Add link to report, demo video, link to data etc. here  
-    </div>
+    
 
-    <div>
-        <h2>Visualization</h2>
-        TODO: Build your visualization tool here  
     </div>
-
+       <h2 class="title">Acknowledgements</h2>
     <div>
-        <h2>Acknowledgements</h2>
-        TODO: Cite resources used here   
-    </div>
+      <ul>
+        <li><a href="https://www.samford.edu/sports-analytics/fans/2018/Why-is-Data-Analytics-So-Important-in-Sports">Why is Data Analytics So Important in Sports?
+        </a></li>
+        <li><a href="https://d3js.org/">Source 2</a></li>
+        <li><a href="https://leanpub.com/D3-Tips-and-Tricks/read">Source 3</a></li>
+        <li><a href="https://d3-graph-gallery.com/graph/interactivity_brush.html#realgraph">Source 4</a></li>
+        <li><a href="https://www.fluidencodings.com/teaching-materials/cc-for-the-web/v1/page.php?pid=data-joins">Source 5</a></li>
+        
 
+    </ul>
+
+    </div>
+    <script src="main.js"></script>
 
 </body>
 
