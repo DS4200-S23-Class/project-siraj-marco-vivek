@@ -46,3 +46,45 @@ font-family: arial;
 .title {
   text-align: center;
 }
+
+#encompass {
+  display: flex;
+  flex-direction: row;
+  object-fit: contain;
+  background-color: plum;
+  height:450px
+
+}
+
+#diamond {
+  width: 60%;
+  padding-right: 10px;
+  object-fit: contain;
+  background-color: rgb(0, 247, 255);
+}
+
+#details {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  object-fit: contain;
+  background-color: rgb(0, 255, 17);
+}
+
+#secondary {
+  height: 65%;
+  object-fit: contain;
+  background-color: rgb(0, 83, 35);
+}
+
+#stats {
+  height: 35%;
+  object-fit: contain;
+  background-color: rgb(255, 0, 0);
+}
+
+
+#dugout {
+  background-color: rgb(229, 255, 0);
+  height: 75px;
+}
