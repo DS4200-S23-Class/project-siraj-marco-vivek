@@ -5,6 +5,9 @@
     <meta charset=utf-8/>
     <link rel="stylesheet" type="text/css" href="style.css" />
     <title>Baseball Project</title>
+    <script src="js/d3.v6.1.1/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+
 </head>
 
 <body>
@@ -63,6 +66,9 @@
                     </div>
                     <div id="statselector">
                         <p>statistic choice here </p>
+                        <select id="name-dropdown">
+                            <option value="">--Please select a name--</option>
+                        </select>
                     </div>
                 </div>
                 <div id="diamond">
@@ -96,6 +102,9 @@
     </div>
     <script src="main.js"></script>
 
+    <!-- Include js at end of body -->
+    <script src="main.js"></script>
+    
 </body>
 
 </html>
