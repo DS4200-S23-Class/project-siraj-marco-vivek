@@ -88,3 +88,10 @@ font-family: arial;
   background-color: rgb(229, 255, 0);
   height: 75px;
 }
+
+.progress-text {
+  font-size: 1.25em;
+  color: black;
+  margin-bottom: 1em;
+  font-weight: 600;
+}
