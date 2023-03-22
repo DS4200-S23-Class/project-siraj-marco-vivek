@@ -187,15 +187,7 @@ dropdown.addEventListener("change", function() {
         let yPos = parseFloat(d3.select(this).attr("y")) + d3.select(this).attr("height") / 2;
         console.log(xPos, yPos);
 
-        // Create the tooltip element
-        let tooltip = d3.select("#bar-graph")
-            .append("div")
-            .attr("class", "tooltip")
-            .html(d);
 
-        // Set the position of the tooltip
-        tooltip.style("left", xPos + "px")
-            .style("top", yPos + "px");
 
         // This part physically is supposed to show the tooltip but is BROKEN
         tooltip.transition()
@@ -212,6 +204,54 @@ dropdown.addEventListener("change", function() {
             .remove();
     }
 
+            const TOOLTIP = d3.select('.bar1')
+                            .append("div")
+                                .attr("class", "tooltip")
+                                .style("opacity", 0);
+
+         // event handler functions for tooltips
+        function handleMouseover(event, d) {
+            d3.select(this).style("fill", "blue");
+            TOOLTIP.style("opacity", 1); 
+        
+         }
+  
+        function handleMousemove(event, d) {
+            // position the tooltip and fill in information 
+            TOOLTIP.html("Category: " + d.x + "<br>Amount: " + d.y)
+                    .style("left", (event.pageX + 10) + "px") //add offset from mouse
+                    .style("top", (event.pageY - 50) + "px"); 
+        }
+        function handleMouseleave(event, d) {
+          d3.select(this).style("fill", "steelblue");
+          // on mouseleave, make transparant again 
+          TOOLTIP.style("opacity", 0); 
+      }
+
+      const TOOLTIP2 = d3.select('.bar2')
+                            .append("div")
+                                .attr("class", "tooltip")
+                                .style("opacity", 0);
+
+         // event handler functions for tooltips
+        function handleMouseover2(event, d) {
+            d3.select(this).style("fill", "darkorange");
+            TOOLTIP.style("opacity", 1); 
+        
+         }
+  
+        function handleMousemove2(event, d) {
+            // position the tooltip and fill in information 
+            TOOLTIP.html("Category: " + d.x + "<br>Amount: " + d.y)
+                    .style("left", (event.pageX + 10) + "px") //add offset from mouse
+                    .style("top", (event.pageY - 50) + "px"); 
+        }
+        function handleMouseleave2(event, d) {
+          d3.select(this).style("fill", "lightsalmon");
+          // on mouseleave, make transparant again 
+          TOOLTIP.style("opacity", 0); 
+      }
+
     // Add the bars for the selected player
     svg.selectAll(".bar1")
         .data(player1Values)
@@ -221,21 +261,23 @@ dropdown.addEventListener("change", function() {
         .attr("y", function(d) { return y(d); })
         .attr("width", x.bandwidth() / 2)
         .attr("height", function(d) { return height - y(d); })
-        .on("mouseover", showTooltip)
-        .on("mouseout", hideTooltip);
+        .on("mouseover", handleMouseover) //add event listeners
+                .on("mousemove", handleMousemove)
+                .on("mouseleave", handleMouseleave);
 
 
     // Add the bars for MLB average (player2)
     svg.selectAll(".bar2")
         .data(player2Values)
         .enter().append("rect")
-        .attr("class", "bar3")
+        .attr("class", "bar2")
         .attr("x", function(d, i) { return x(statsToCompare[i]) + x.bandwidth() / 2; })
         .attr("y", function(d) { return y(d); })
         .attr("width", x.bandwidth() / 2)
         .attr("height", function(d) { return height - y(d); })
-        .on("mouseover", showTooltip)
-        .on("mouseout", hideTooltip);
+        .on("mouseover", handleMouseover2) //add event listeners
+        .on("mousemove", handleMousemove2)
+        .on("mouseleave", handleMouseleave2);
 
       
 

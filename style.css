@@ -104,3 +104,12 @@ font-family: arial;
 .bar2 {
   fill: lightsalmon;
 }
+
+.tooltip {
+  position: absolute;
+  background-color: lightgreen;
+  border:  solid;
+  border-width: 2px;
+  border-radius: 5px;
+  padding: 5px;
+}
