@@ -203,7 +203,6 @@ dropdown.addEventListener("change", function() {
             .style("opacity", 0)
             .remove();
     }
-<<<<<<< HEAD
 
             const TOOLTIP = d3.select('.bar1')
                             .append("div")
@@ -253,10 +252,6 @@ dropdown.addEventListener("change", function() {
           TOOLTIP.style("opacity", 0); 
       }
 
-=======
-        
-    
->>>>>>> 35506d459f99e539f227129b999fb3803a4d49e1
     // Add the bars for the selected player
     svg.selectAll(".bar1")
         .data(player1Values)
@@ -280,16 +275,10 @@ dropdown.addEventListener("change", function() {
         .attr("y", function(d) { return y(d); })
         .attr("width", x.bandwidth() / 2)
         .attr("height", function(d) { return height - y(d); })
-<<<<<<< HEAD
         .on("mouseover", handleMouseover2) //add event listeners
         .on("mousemove", handleMousemove2)
         .on("mouseleave", handleMouseleave2);
 
-=======
-        .on("mouseover", showTooltip)
-        .on("mouseout", hideTooltip);
-   
->>>>>>> 35506d459f99e539f227129b999fb3803a4d49e1
       
 
     }
