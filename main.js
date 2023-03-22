@@ -1,5 +1,5 @@
 // Define the CSV file location
-var csvFilePath = 'cleaned_baseball_data.csv';
+let csvFilePath = 'cleaned_baseball_data.csv';
 
 // Prints first 10 lines of CSV to console
 console.log("First 10 rows of data file:")
@@ -34,27 +34,27 @@ Papa.parse(csvFilePath, {
 
 
 // Get the dropdown element -- is this redundant???
-var dropdown = document.getElementById("name-dropdown");
+let dropdown = document.getElementById("name-dropdown");
 
 // Add an event listener to the dropdown to get the selected value from the dropdown
 dropdown.addEventListener("change", function() {
-  var selectedValue = dropdown.value;
+  let selectedValue = dropdown.value;
   
   // Send a request to the server to return the data row for the selected player
-  var xhr = new XMLHttpRequest();
+  let xhr = new XMLHttpRequest();
   xhr.open("GET", "cleaned_baseball_data.csv", true);
   
   xhr.onload = function() {
     if (xhr.status === 200) {
       // Parse the CSV data into an array of objects
-      var data = xhr.responseText.split('\n').map(function(row) {
+      let data = xhr.responseText.split('\n').map(function(row) {
         return row.split(',');
       });
       
       // Find the row that matches the selected player
-      var playerRow = null;
-      var MLB_AVG = data[790];
-      for (var i = 0; i < data.length; i++) {
+      let playerRow = null;
+      let MLB_AVG = data[790];
+      for (let i = 0; i < data.length; i++) {
         if (data[i][1] === selectedValue) {
           playerRow = data[i];
           break;
@@ -183,11 +183,12 @@ dropdown.addEventListener("change", function() {
         
     function showTooltip(d) {
         // Get the x and y positions of the bar
-        var xPos = parseFloat(d3.select(this).attr("x")) + d3.select(this).attr("width") / 2;
-        var yPos = parseFloat(d3.select(this).attr("y")) + d3.select(this).attr("height") / 2;
+        let xPos = parseFloat(d3.select(this).attr("x")) + d3.select(this).attr("width") / 2;
+        let yPos = parseFloat(d3.select(this).attr("y")) + d3.select(this).attr("height") / 2;
+        console.log(xPos, yPos);
 
         // Create the tooltip element
-        var tooltip = d3.select("#bar-graph")
+        let tooltip = d3.select("#bar-graph")
             .append("div")
             .attr("class", "tooltip")
             .html(d);
@@ -228,7 +229,7 @@ dropdown.addEventListener("change", function() {
     svg.selectAll(".bar2")
         .data(player2Values)
         .enter().append("rect")
-        .attr("class", "bar2")
+        .attr("class", "bar3")
         .attr("x", function(d, i) { return x(statsToCompare[i]) + x.bandwidth() / 2; })
         .attr("y", function(d) { return y(d); })
         .attr("width", x.bandwidth() / 2)
@@ -248,6 +249,7 @@ dropdown.addEventListener("change", function() {
 
 svg = d3.select("#diamond")
         .append("svg")
+          .attr("id", "diamond_animate")
           .attr("width", "600")
           .attr("height", "350")
           .attr("version", "1.1")
@@ -297,7 +299,7 @@ svg.append("circle")
       .attr("fill", "white")
 
 
-var path = new ProgressBar.Path("#diamond_", {
+let path = new ProgressBar.Path("#diamond_", {
   duration: 6000,
   from: {
     color: "#ff0000",
@@ -317,4 +319,4 @@ var path = new ProgressBar.Path("#diamond_", {
 
 
 // update the percent by change the value here
-path.animate(1);
+path.animate(.96);
