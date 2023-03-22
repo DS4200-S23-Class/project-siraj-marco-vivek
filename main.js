@@ -181,37 +181,7 @@ dropdown.addEventListener("change", function() {
       .attr("transform", "rotate(-90)")
       .text("Season Total");
         
-    function showTooltip(d) {
-        // Get the x and y positions of the bar
-        let xPos = parseFloat(d3.select(this).attr("x")) + d3.select(this).attr("width") / 2;
-        let yPos = parseFloat(d3.select(this).attr("y")) + d3.select(this).attr("height") / 2;
-        console.log(xPos, yPos);
-
-        // Create the tooltip element
-        let tooltip = d3.select("#bar-graph")
-            .append("div")
-            .attr("class", "tooltip")
-            .html(d);
-
-        // Set the position of the tooltip
-        tooltip.style("left", xPos + "px")
-            .style("top", yPos + "px");
-
-        // This part physically is supposed to show the tooltip but is BROKEN
-        tooltip.transition()
-            .duration(200)
-            .style("opacity", 0.9);
-    }
-
-    function hideTooltip() {
-        // Hide the tooltip
-        d3.select(".tooltip")
-            .transition()
-            .duration(500)
-            .style("opacity", 0)
-            .remove();
-    }
-
+    
     // Add the bars for the selected player
     svg.selectAll(".bar1")
         .data(player1Values)
