@@ -317,7 +317,7 @@ svg.append("circle")
       .attr("cy", "300")
       .attr("cx", "180")
       .attr("r", "20")
-      .attr("fill", "brown")
+      .attr("fill", "white")
 
 svg.append("circle")
       .attr("id", "base")

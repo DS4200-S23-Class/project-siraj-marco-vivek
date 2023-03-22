@@ -52,15 +52,16 @@ font-family: arial;
   flex-direction: row;
   object-fit: contain;
   background-color: plum;
-  height:450px
+  height:450px;
 
 }
 
 #diamond {
+  flex: 1;
   width: 60%;
   padding-right: 10px;
   object-fit: contain;
-  background-color: rgb(0, 247, 255);
+  background-color: rgb(84, 140, 47);
 }
 
 #details {
@@ -68,13 +69,13 @@ font-family: arial;
   flex-direction: column;
   width: 40%;
   object-fit: contain;
-  background-color: rgb(0, 255, 17);
+  background-color: rgb(65, 106, 38);
 }
 
 #secondary {
   height: 65%;
   object-fit: contain;
-  background-color: rgb(0, 83, 35);
+  background-color: rgb(65, 106, 38);
 }
 
 #stats {
