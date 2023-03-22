@@ -89,9 +89,18 @@ font-family: arial;
   height: 75px;
 }
 
+
 .progress-text {
   font-size: 1.25em;
   color: black;
   margin-bottom: 1em;
   font-weight: 600;
+}
+
+.bar1 {
+  fill: steelblue;
+}
+
+.bar2 {
+  fill: lightsalmon;
 }
