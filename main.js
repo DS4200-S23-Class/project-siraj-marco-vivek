@@ -217,10 +217,8 @@ dropdown.addEventListener("change", function() {
          }
   
         function handleMousemove(event, d) {
-            // position the tooltip and fill in information 
-            TOOLTIP.html("Category: " + d.x + "<br>Amount: " + d.y)
-                    .style("left", (event.pageX + 10) + "px") //add offset from mouse
-                    .style("top", (event.pageY - 50) + "px"); 
+          //leaving empty for now
+                    
         }
         function handleMouseleave(event, d) {
           d3.select(this).style("fill", "steelblue");
@@ -242,9 +240,7 @@ dropdown.addEventListener("change", function() {
   
         function handleMousemove2(event, d) {
             // position the tooltip and fill in information 
-            TOOLTIP.html("Category: " + d.x + "<br>Amount: " + d.y)
-                    .style("left", (event.pageX + 10) + "px") //add offset from mouse
-                    .style("top", (event.pageY - 50) + "px"); 
+            //leaving empty for now
         }
         function handleMouseleave2(event, d) {
           d3.select(this).style("fill", "lightsalmon");
@@ -261,7 +257,11 @@ dropdown.addEventListener("change", function() {
         .attr("y", function(d) { return y(d); })
         .attr("width", x.bandwidth() / 2)
         .attr("height", function(d) { return height - y(d); })
-        .on("mouseover", handleMouseover) //add event listeners
+        .on("mouseover", function() {
+          const dataObject = console.log(this); // logs the 'rect' element
+          console.log(d3.select(this).attr('x'))
+          /// have to figure out a way to return the player name and get the measurement instead of x.
+        }) //add event listeners
                 .on("mousemove", handleMousemove)
                 .on("mouseleave", handleMouseleave);
 
