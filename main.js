@@ -107,7 +107,7 @@ dropdown.addEventListener("change", function() {
     player2Values = [AVG_GP, AVG_PA, AVG_AB, AVG_Runs, AVG_Hits, AVG_Doubles, AVG_Triples, 
         AVG_HR, AVG_RBI, AVG_SB, AVG_CS, AVG_Walks, AVG_Strikeouts, AVG_HAB]
 
-    const statsToCompare = ["Games Played", "Player Appearances", "At Bats",
+    const statsToCompare = ["Games Played", "Plate Appearances", "At Bats",
                             "Runs", "Hits", "Doubles", "Triples", "Home Runs",
                             "Runs Batted In", "Stolen Bases", "Caught Stealing", "Walks",
                             "Strikeouts", "Hits at Bats"];
