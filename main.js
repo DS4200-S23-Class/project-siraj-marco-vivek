@@ -32,6 +32,15 @@ Papa.parse(csvFilePath, {
     }
 });
 
+// Create dropdown for attribute
+let att_drop = document.getElementById("attribute-dropdown");
+let cols = data.columns;
+cols.forEach(col => {
+        const option = document.createElement("option");
+        option.text = col;
+        option.value = col;
+        att_drop.append(option);
+    });
 
 // Get the dropdown element -- is this redundant???
 let dropdown = document.getElementById("name-dropdown");
@@ -361,4 +370,12 @@ let path = new ProgressBar.Path("#diamond_", {
 
 
 // update the percent by change the value here
-path.animate(.96);
+path.animate(1);
+
+
+function update_diamond(){
+    console.log("hi");
+    path.animate(Math.random());
+};
+
+svg.on("click", update_diamond);
