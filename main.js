@@ -17,7 +17,7 @@ Papa.parse(csvFilePath, {
     header: true,
     complete: function(results) {
       // Get the column headers from the parsed CSV
-      const headers = results.meta.fields;
+      const headers = results.meta.fields.slice(6);
     
       // Fetch the dropdown element
       const dropdown = document.getElementById("attribute-dropdown");
