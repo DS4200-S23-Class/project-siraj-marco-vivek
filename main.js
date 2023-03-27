@@ -16,20 +16,35 @@ Papa.parse(csvFilePath, {
     download: true,
     header: true,
     complete: function(results) {
-        // Get the 'Name' column data from the parsed CSV for dropdown in HTML
-        const names = results.data.map(item => item.Name);
-
-        // Fetch the dropdown element
-        const dropdown = document.getElementById("name-dropdown");
-
-        // Iteratively add names from Name column to dropdown option
-        names.forEach(name => {
-            const option = document.createElement("option");
-            option.text = name;
-            option.value = name;
-            dropdown.appendChild(option);
-        });
+      // Get the column headers from the parsed CSV
+      const headers = results.meta.fields;
+    
+      // Fetch the dropdown element
+      const dropdown = document.getElementById("attribute-dropdown");
+    
+      // Iteratively add headers to dropdown options
+      headers.forEach(header => {
+        const option = document.createElement("option");
+        option.text = header;
+        option.value = header;
+        dropdown.appendChild(option);
+      });
+    
+      // Get the 'Name' column data from the parsed CSV for dropdown in HTML
+      const names = results.data.map(item => item.Name);
+    
+      // Fetch the dropdown element for names
+      const nameDropdown = document.getElementById("name-dropdown");
+    
+      // Iteratively add names from Name column to dropdown option
+      names.forEach(name => {
+        const option = document.createElement("option");
+        option.text = name;
+        option.value = name;
+        nameDropdown.appendChild(option);
+      });
     }
+    
 });
 
 // Create dropdown for attribute
