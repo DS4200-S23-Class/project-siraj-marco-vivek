@@ -4,6 +4,15 @@ let csvFilePath = 'cleaned_baseball_data.csv';
 // Prints first 10 lines of CSV to console
 console.log("First 10 rows of data file:")
 d3.csv(csvFilePath).then((data) => {
+  // Create dropdown for attribute
+  let att_drop = document.getElementById("attribute-dropdown");
+  let cols = data.columns;
+  cols.forEach(col => {
+          const option = document.createElement("option");
+          option.text = col;
+          option.value = col;
+          att_drop.append(option);
+      });
     for (let i = 0; i < 10; i++) {
       console.log(data[i]);
     }
@@ -46,16 +55,6 @@ Papa.parse(csvFilePath, {
     }
     
 });
-
-// Create dropdown for attribute
-let att_drop = document.getElementById("attribute-dropdown");
-let cols = data.columns;
-cols.forEach(col => {
-        const option = document.createElement("option");
-        option.text = col;
-        option.value = col;
-        att_drop.append(option);
-    });
 
 // Get the dropdown element -- is this redundant???
 let dropdown = document.getElementById("name-dropdown");
@@ -324,14 +323,14 @@ svg = d3.select("#diamond")
           .attr("viewBox", "0 0 300 350");
 
 svg.append("path")
-      .attr("d", "M 180 300 L 50 120 L 180 50 L 310 120 z")
+      .attr("d", "M 180 300 L 310 120 L 180 50 L 50 120z")
       .attr("fill", "none")
       .attr("stroke", "#ddd")
       .attr("stroke-width", "1")
 
 svg.append("path")
       .attr("id", "diamond_")
-      .attr("d", "M 180 300 L 50 120 L 180 50 L 310 120 z")
+      .attr("d", "M 180 300 L 310 120 L 180 50 L 50 120z")
       .attr("fill", "none")
       .attr("stroke", "red")
       .attr("stoke-width", "5")
@@ -388,9 +387,19 @@ let path = new ProgressBar.Path("#diamond_", {
 path.animate(1);
 
 
+let attr_drop = document.getElementById("attribute-dropdown");
+let player_drop = document.getElementById("name-dropdown");
+
 function update_diamond(){
-    console.log("hi");
-    path.animate(Math.random());
+
+    var attr = attr_drop.value;
+    var name = player_drop.value;
+
+    if (attr.length != 0 && name.length != 0){console.log(1)} 
+    // Search for the player with the specified name
+    //var matchingPlayer = players.find(function(player) {
+    //  return player.name === name;
+    //});
 };
 
-svg.on("click", update_diamond);
+//svg.on("click", update_diamond);
