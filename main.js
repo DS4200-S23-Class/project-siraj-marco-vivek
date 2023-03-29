@@ -346,7 +346,7 @@ dropdown.addEventListener("change", function() {
         
 
 
-            const TOOLTIP = d3.select('.bar1')
+            const TOOLTIP = d3.select('body')
                             .append("div")
                                 .attr("class", "tooltip")
                                 .style("opacity", 0);
@@ -358,16 +358,18 @@ dropdown.addEventListener("change", function() {
         
          }
   
-        function handleMousemove(event, d) {
-          let player_name = document.getElementById("name-dropdown");
-          let selectedText = player_name.options[player_name.selectedIndex].text;
-          console.log(selectedText);
-          
-          TOOLTIP.html("Player Name: " + selectedText)
-          .style("left", (event.pageX + 10) + "px") //add offset from mouse
-          .style("top", (event.pageY - 50) + "px"); 
-                    
+
+          function handleMousemove(event, d) {
+            // position the tooltip and fill in information 
+            let player_name = document.getElementById("name-dropdown");
+            let selectedText = player_name.options[player_name.selectedIndex].text;
+            console.log("Player: " + selectedText );
+            TOOLTIP.html("Player: " + selectedText)
+                    .style("left", (event.pageX + 10) + "px") //add offset from mouse
+                    .style("top", (event.pageY - 50) + "px"); 
         }
+          
+    
         function handleMouseleave(event, d) {
           d3.select(this).style("fill", "steelblue");
           // on mouseleave, make transparant again 
