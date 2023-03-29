@@ -111,35 +111,35 @@ d3.csv(csvFilePath).then((data) => {
 
     function update_diamond(){
 
-        var attr = attr_drop.value;
-        var name = player_drop.value;
+        let attr = attr_drop.value;
+        let name = player_drop.value;
 
         if (attr.length != 0 && name.length != 0){
           // Find the index of the player by name
-          var playerName = 'Alice';
-          var playerIndex = -1;
-          for (var i = 0; i < data.length; i++) {
+          let playerName = 'Alice';
+          let playerIndex = -1;
+          for (let i = 0; i < data.length; i++) {
             if (data[i]['Name'] === name) {
               playerIndex = i;
               break;
             };
           };
-          var attr_val = data[playerIndex][attr];
+          let attr_val = data[playerIndex][attr];
           all_time = -Infinity
-          for (var i = 0; i < data.length; i++) {
-            var value = parseFloat(data[i][attr]);
+          for (let i = 0; i < data.length; i++) {
+            let value = parseFloat(data[i][attr]);
             if (value > all_time) {
               all_time = value;
             };
           };
-          var percent = Math.round(attr_val / all_time * 100);
-          var txt = svg.selectAll("text");
-          var number = parseInt(txt.text().replace("%", ""));
+          let percent = Math.round(attr_val / all_time * 100);
+          let txt = svg.selectAll("text");
+          let number = parseInt(txt.text().replace("%", ""));
 
           function iterateNumbers(startNum, endNum) {
             // Determine the direction of the iteration
-            var increment = (startNum <= endNum) ? 1 : -1;
-            var i = startNum;
+            let increment = (startNum <= endNum) ? 1 : -1;
+            let i = startNum;
             // Iterate through the numbers
             d3.interval(function() {
               if (i != endNum) {
@@ -298,6 +298,7 @@ dropdown.addEventListener("change", function() {
     removeBarGraph();
 
     const svg = d3.select("#bar-graph").append("svg")
+        .attr("id", 'graph')
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
@@ -343,28 +344,7 @@ dropdown.addEventListener("change", function() {
       .attr("transform", "rotate(-90)")
       .text("Season Total");
         
-    function showTooltip(d) {
-        // Get the x and y positions of the bar
-        let xPos = parseFloat(d3.select(this).attr("x")) + d3.select(this).attr("width") / 2;
-        let yPos = parseFloat(d3.select(this).attr("y")) + d3.select(this).attr("height") / 2;
-        console.log(xPos, yPos);
 
-
-
-        // This part physically is supposed to show the tooltip but is BROKEN
-        tooltip.transition()
-            .duration(200)
-            .style("opacity", 0.9);
-    }
-
-    function hideTooltip() {
-        // Hide the tooltip
-        d3.select(".tooltip")
-            .transition()
-            .duration(500)
-            .style("opacity", 0)
-            .remove();
-    }
 
             const TOOLTIP = d3.select('.bar1')
                             .append("div")
@@ -381,6 +361,8 @@ dropdown.addEventListener("change", function() {
         function handleMousemove(event, d) {
           let player_name = document.getElementById("name-dropdown");
           let selectedText = player_name.options[player_name.selectedIndex].text;
+          console.log(selectedText);
+          
           TOOLTIP.html("Player Name: " + selectedText)
           .style("left", (event.pageX + 10) + "px") //add offset from mouse
           .style("top", (event.pageY - 50) + "px"); 
