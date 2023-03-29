@@ -4,6 +4,95 @@ let csvFilePath = 'cleaned_baseball_data.csv';
 // Prints first 10 lines of CSV to console
 console.log("First 10 rows of data file:")
 d3.csv(csvFilePath).then((data) => {
+  
+  // ~~~~~~~~~~~~~~~~ BASEBALL DIAMOND ~~~~~~~~~~~~~~~~~~~~~
+  svg = d3.select("#diamond")
+  .append("svg")
+  .attr("id", "diamond_animate")
+  .attr("width", "600")
+  .attr("height", "350")
+  .attr("version", "1.1")
+  .attr("x", "0")
+  .attr("y", "0")
+  .attr("viewBox", "0 0 300 350");
+
+   svg.append("circle")
+  .attr("id", "center")
+  .attr("cy", "165")
+  .attr("cx", "180")
+  .attr("r", "30")
+  .attr("fill", "orange"); 
+
+  svg.append("text")
+  .attr("x", "150")
+  .attr("y", "175")
+  .attr("font-size", 24)
+  .attr("fill", "black")
+  .text("100%");
+  
+  svg.append("path")
+  .attr("d", "M 180 300 L 310 120 L 180 50 L 50 120z")
+  .attr("fill", "none")
+  .attr("stroke", "#ddd")
+  .attr("stroke-width", "1");
+
+  svg.append("path")
+  .attr("id", "diamond_")
+  .attr("d", "M 180 300 L 310 120 L 180 50 L 50 120z")
+  .attr("fill", "none")
+  .attr("stroke", "red")
+  .attr("stoke-width", "5");
+
+  svg.append("circle")
+  .attr("id", "base")
+  .attr("cy", "300")
+  .attr("cx", "180")
+  .attr("r", "20")
+  .attr("fill", "white");
+
+  svg.append("circle")
+  .attr("id", "base")
+  .attr("cy", "120")
+  .attr("cx", "50")
+  .attr("r", "20")
+  .attr("fill", "white");
+
+  svg.append("circle")
+  .attr("id", "base")
+  .attr("cy", "50")
+  .attr("cx", "180")
+  .attr("r", "20")
+  .attr("fill", "white");
+
+  svg.append("circle")
+  .attr("id", "base")
+  .attr("cy", "120")
+  .attr("cx", "310")
+  .attr("r", "20")
+  .attr("fill", "white");
+
+
+  let path = new ProgressBar.Path("#diamond_", {
+    duration: 6000,
+    from: {
+      color: "#ff0000",
+      width: 2
+    },
+    to: {
+      color: "#0099ff",
+      width: 10
+    },
+    strokeWidth: 4,
+    easing: "easeInOut",
+    step: (state, shape) => {
+      shape.path.setAttribute("stroke", state.color);
+      shape.path.setAttribute("stroke-width", state.width);
+    }
+  });
+  
+  // update the percent by change the value here
+  path.animate(1);
+
   // Create dropdown for attribute
   let att_drop = document.getElementById("attribute-dropdown");
   let cols = data.columns;
@@ -15,7 +104,57 @@ d3.csv(csvFilePath).then((data) => {
       });
     for (let i = 0; i < 10; i++) {
       console.log(data[i]);
-    }
+    };
+
+    let attr_drop = document.getElementById("attribute-dropdown");
+    let player_drop = document.getElementById("name-dropdown");
+
+    function update_diamond(){
+
+        var attr = attr_drop.value;
+        var name = player_drop.value;
+
+        if (attr.length != 0 && name.length != 0){
+          // Find the index of the player by name
+          var playerName = 'Alice';
+          var playerIndex = -1;
+          for (var i = 0; i < data.length; i++) {
+            if (data[i]['Name'] === name) {
+              playerIndex = i;
+              break;
+            };
+          };
+          var attr_val = data[playerIndex][attr];
+          all_time = -Infinity
+          for (var i = 0; i < data.length; i++) {
+            var value = parseFloat(data[i][attr]);
+            if (value > all_time) {
+              all_time = value;
+            };
+          };
+          var percent = Math.round(attr_val / all_time * 100);
+          var txt = svg.selectAll("text");
+          var number = parseInt(txt.text().replace("%", ""));
+
+          function iterateNumbers(startNum, endNum) {
+            // Determine the direction of the iteration
+            var increment = (startNum <= endNum) ? 1 : -1;
+            var i = startNum;
+            // Iterate through the numbers
+            d3.interval(function() {
+              if (i != endNum) {
+              i += increment
+              // Modify the text element with the given ID
+              txt.text(i.toString() + "%");
+            }}, 80
+            )};
+
+          iterateNumbers(number, percent);
+          path.animate(percent/100);
+        };
+    };
+    attr_drop.addEventListener("change", update_diamond);
+    player_drop.addEventListener("change", update_diamond);
   }).catch((error) => {
     console.log(error);
   });
@@ -308,98 +447,3 @@ dropdown.addEventListener("change", function() {
   };
   xhr.send();
 });
-
-// ~~~~~~~~~~~~~~~~ BASEBALL DIAMOND ~~~~~~~~~~~~~~~~~~~~~
-
-
-svg = d3.select("#diamond")
-        .append("svg")
-          .attr("id", "diamond_animate")
-          .attr("width", "600")
-          .attr("height", "350")
-          .attr("version", "1.1")
-          .attr("x", "0")
-          .attr("y", "0")
-          .attr("viewBox", "0 0 300 350");
-
-svg.append("path")
-      .attr("d", "M 180 300 L 310 120 L 180 50 L 50 120z")
-      .attr("fill", "none")
-      .attr("stroke", "#ddd")
-      .attr("stroke-width", "1")
-
-svg.append("path")
-      .attr("id", "diamond_")
-      .attr("d", "M 180 300 L 310 120 L 180 50 L 50 120z")
-      .attr("fill", "none")
-      .attr("stroke", "red")
-      .attr("stoke-width", "5")
-
-svg.append("circle")
-      .attr("id", "base")
-      .attr("cy", "300")
-      .attr("cx", "180")
-      .attr("r", "20")
-      .attr("fill", "white")
-
-svg.append("circle")
-      .attr("id", "base")
-      .attr("cy", "120")
-      .attr("cx", "50")
-      .attr("r", "20")
-      .attr("fill", "white")
-
-svg.append("circle")
-      .attr("id", "base")
-      .attr("cy", "50")
-      .attr("cx", "180")
-      .attr("r", "20")
-      .attr("fill", "white")
-
-svg.append("circle")
-      .attr("id", "base")
-      .attr("cy", "120")
-      .attr("cx", "310")
-      .attr("r", "20")
-      .attr("fill", "white")
-
-
-let path = new ProgressBar.Path("#diamond_", {
-  duration: 6000,
-  from: {
-    color: "#ff0000",
-    width: 2
-  },
-  to: {
-    color: "#0099ff",
-    width: 10
-  },
-  strokeWidth: 4,
-  easing: "easeInOut",
-  step: (state, shape) => {
-    shape.path.setAttribute("stroke", state.color);
-    shape.path.setAttribute("stroke-width", state.width);
-  }
-});
-
-
-// update the percent by change the value here
-path.animate(1);
-
-
-let attr_drop = document.getElementById("attribute-dropdown");
-let player_drop = document.getElementById("name-dropdown");
-
-function update_diamond(){
-
-    var attr = attr_drop.value;
-    var name = player_drop.value;
-
-    if (attr.length != 0 && name.length != 0){console.log(1)} 
-    // Search for the player with the specified name
-    //var matchingPlayer = players.find(function(player) {
-    //  return player.name === name;
-    //});
-};
-
-//svg.on("click", update_diamond);
