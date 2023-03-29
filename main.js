@@ -379,7 +379,11 @@ dropdown.addEventListener("change", function() {
          }
   
         function handleMousemove(event, d) {
-          //leaving empty for now
+          let player_name = document.getElementById("name-dropdown");
+          let selectedText = player_name.options[player_name.selectedIndex].text;
+          TOOLTIP.html("Player Name: " + selectedText)
+          .style("left", (event.pageX + 10) + "px") //add offset from mouse
+          .style("top", (event.pageY - 50) + "px"); 
                     
         }
         function handleMouseleave(event, d) {
@@ -419,11 +423,7 @@ dropdown.addEventListener("change", function() {
         .attr("y", function(d) { return y(d); })
         .attr("width", x.bandwidth() / 2)
         .attr("height", function(d) { return height - y(d); })
-        .on("mouseover", function() {
-          const dataObject = console.log(this); // logs the 'rect' element
-          console.log(d3.select(this).attr('x'))
-          /// have to figure out a way to return the player name and get the measurement instead of x.
-        }) //add event listeners
+        .on("mouseover", handleMouseover) //add event listeners
                 .on("mousemove", handleMousemove)
                 .on("mouseleave", handleMouseleave);
 
