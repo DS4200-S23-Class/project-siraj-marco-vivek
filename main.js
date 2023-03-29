@@ -363,7 +363,7 @@ dropdown.addEventListener("change", function() {
             // position the tooltip and fill in information 
             let player_name = document.getElementById("name-dropdown");
             let selectedText = player_name.options[player_name.selectedIndex].text;
-            console.log("Player: " + selectedText );
+            console.log(d3.select(this).height);
             TOOLTIP.html("Player: " + selectedText)
                     .style("left", (event.pageX + 10) + "px") //add offset from mouse
                     .style("top", (event.pageY - 50) + "px"); 
