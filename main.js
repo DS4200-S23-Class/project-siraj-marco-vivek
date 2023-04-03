@@ -331,23 +331,24 @@ function sortDataAndLogTopPlayers(category) {
   /// now just have to get index of selected category
   const item = category;
   const index = data[0].indexOf(item);
-  console.log(`Index of ${item} in the first list: ${index}`);
-
-  data.sort((a, b) => {
+  
+  const lastIndex = data.length - 2;
+  data.slice(0, lastIndex).sort((a, b) => {
     return b[index] - a[index];
   }); // sort in descending order
 
 
   const topPlayers = data.slice(1, 6).map(player => player[1]);
-  console.log(`Top 5 players in ${category}:`);
-  console.log(topPlayers);
+  
 
     for (let i = 0; i < topPlayers.length; i++) {
       const playerDiv = document.getElementById(`player${i+1}`);
       playerDiv.textContent = `${i+1}. ${topPlayers[i]}`;
     }
+    spaces = category.replace(/_/g, " ")
+
     const text = document.getElementById(`dugout_text`);
-    text.innerHTML = `Top players for ${category} in the 2022 season`;
+    text.innerHTML = `Leaders for ${spaces} in the 2022 season`;
 
 
 
