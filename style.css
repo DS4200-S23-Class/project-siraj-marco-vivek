@@ -103,9 +103,14 @@ font-family: arial;
 
 
 #dugout {
-  background-color: rgb(229, 255, 0);
+  background-color: rgb(185, 174, 90);
   height: 75px;
+  padding-right: 20px;
+  display: flex;
+  text-align: center;
+  justify-content: space-between;
 }
+
 
 
 .progress-text {
