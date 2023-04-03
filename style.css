@@ -14,7 +14,6 @@
 
 #descriptor-2, #player-age {
   display: inline-block;
-  /* or display: inline; */
   margin: 0; /* remove default margin */
 }
 
@@ -116,6 +115,9 @@ font-family: arial;
 .player {
   display: flex;
   align-items: center;
+  color: white;
+  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
+  padding: 10px;
 }
 
 .progress-text {
@@ -123,6 +125,20 @@ font-family: arial;
   color: black;
   margin-bottom: 1em;
   font-weight: 600;
+}
+
+.text {
+  color: white;
+
+}
+
+.content {
+  color: white;
+
+}
+
+#player-stats-list {
+  color: white;
 }
 
 .bar1 {
