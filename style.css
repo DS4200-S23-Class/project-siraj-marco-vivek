@@ -91,12 +91,14 @@ font-family: arial;
 #secondary {
   display: flex;
   height: 65%;
+  display: flex;
   object-fit: contain;
   background-color: rgb(65, 106, 38);
 }
 
 #stats {
   height: 35%;
+  display: flex;
   object-fit: contain;
   background-color: rgb(255, 0, 0);
 }
@@ -111,7 +113,10 @@ font-family: arial;
   justify-content: space-between;
 }
 
-
+.player {
+  display: flex;
+  align-items: center;
+}
 
 .progress-text {
   font-size: 1.25em;

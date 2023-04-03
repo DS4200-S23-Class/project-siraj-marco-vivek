@@ -322,6 +322,46 @@ dropdown.addEventListener("change", function() {
     }
 
     console.log(myList);
+    
+    // read in your CSV file and parse it into an array of objects
+// each object should represent a player and their statistics
+
+// sort the data based on the selected category and log the top 5 player names
+function sortDataAndLogTopPlayers(category) {
+  /// now just have to get index of selected category
+  const item = category;
+  const index = data[0].indexOf(item);
+  console.log(`Index of ${item} in the first list: ${index}`);
+
+  data.sort((a, b) => {
+    return b[index] - a[index];
+  }); // sort in descending order
+
+
+  const topPlayers = data.slice(1, 6).map(player => player[1]);
+  console.log(`Top 5 players in ${category}:`);
+  console.log(topPlayers);
+
+    for (let i = 0; i < topPlayers.length; i++) {
+      const playerDiv = document.getElementById(`player${i+1}`);
+      playerDiv.textContent = `${i+1}. ${topPlayers[i]}`;
+    }
+    const text = document.getElementById(`dugout_text`);
+    text.innerHTML = `Top players for ${category} in the 2022 season`;
+
+
+
+    
+  
+}
+
+// call the function when the user selects a category
+const attribute = document.getElementById("attribute-dropdown");
+attribute.addEventListener("change", function() {
+  const category = this.value;
+  sortDataAndLogTopPlayers(category);
+});
+
 
     // Set up the bar graph
     const margin = { top: 20, right: 20, bottom: 100, left: 100 };
