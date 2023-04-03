@@ -332,13 +332,16 @@ function sortDataAndLogTopPlayers(category) {
   const item = category;
   const index = data[0].indexOf(item);
   console.log(index);
+  const lastIndex = data.length - 1;
+
   
   data.sort((a, b) => {
     return b[index] - a[index];
   }); // sort in descending order
-  
+
 
   const topPlayers = data.slice(1, 6).map(player => player[1]);
+
   
 
     for (let i = 0; i < topPlayers.length; i++) {
@@ -451,10 +454,13 @@ attribute.addEventListener("change", function() {
 
           function handleMousemove(event, d) {
             // position the tooltip and fill in information 
+            const bar = event.target;
             let player_name = document.getElementById("name-dropdown");
             let selectedText = player_name.options[player_name.selectedIndex].text;
-            console.log(d3.select(this).height);
-            TOOLTIP.html("Player: " + selectedText)
+            let computedStyle = getComputedStyle(bar);
+            let height = computedStyle.getPropertyValue('height');
+            console.log(height);
+            TOOLTIP.html("Player: " + selectedText + "<br>height: " + height)
                     .style("left", (event.pageX + 10) + "px") //add offset from mouse
                     .style("top", (event.pageY - 50) + "px"); 
         }
@@ -466,11 +472,6 @@ attribute.addEventListener("change", function() {
           TOOLTIP.style("opacity", 0); 
       }
 
-      const TOOLTIP2 = d3.select('.bar2')
-                            .append("div")
-                                .attr("class", "tooltip")
-                                .style("opacity", 0);
-
          // event handler functions for tooltips
         function handleMouseover2(event, d) {
             d3.select(this).style("fill", "darkorange");
@@ -478,10 +479,16 @@ attribute.addEventListener("change", function() {
         
          }
   
-        function handleMousemove2(event, d) {
-            // position the tooltip and fill in information 
-            //leaving empty for now
-        }
+         function handleMousemove2(event, d) {
+          // position the tooltip and fill in information 
+          const bar = event.target;
+          let computedStyle = getComputedStyle(bar);
+          let height = computedStyle.getPropertyValue('height');
+          console.log(height);
+          TOOLTIP.html("MLB Average: " + height)
+                  .style("left", (event.pageX + 10) + "px") //add offset from mouse
+                  .style("top", (event.pageY - 50) + "px"); 
+      }
         function handleMouseleave2(event, d) {
           d3.select(this).style("fill", "lightsalmon");
           // on mouseleave, make transparant again 
