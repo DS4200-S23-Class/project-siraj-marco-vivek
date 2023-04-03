@@ -3,6 +3,7 @@ let csvFilePath = 'cleaned_baseball_data.csv';
 
 // Prints first 10 lines of CSV to console
 console.log("First 10 rows of data file:")
+
 d3.csv(csvFilePath).then((data) => {
   
   // ~~~~~~~~~~~~~~~~ BASEBALL DIAMOND ~~~~~~~~~~~~~~~~~~~~~
@@ -192,6 +193,8 @@ Papa.parse(csvFilePath, {
         nameDropdown.appendChild(option);
       });
     }
+
+
     
 });
 
@@ -200,6 +203,7 @@ let dropdown = document.getElementById("name-dropdown");
 
 // Add an event listener to the dropdown to get the selected value from the dropdown
 dropdown.addEventListener("change", function() {
+
   let selectedValue = dropdown.value;
   
   // Send a request to the server to return the data row for the selected player
@@ -226,6 +230,8 @@ dropdown.addEventListener("change", function() {
       // If we found the player's row, print out their Name in the console to confirm
       if (playerRow) {
         console.log("Player: " + playerRow[1]);
+        console.log(playerRow[1] + ' Stats: ' + playerRow[2] + ', ' + playerRow[3] + ', '
+            + playerRow[4] + ', ' + playerRow[5] + ', ' + playerRow[6] + ', ' + playerRow[7]);
       } else {
         console.log("Player not found");
       }
@@ -266,6 +272,7 @@ dropdown.addEventListener("change", function() {
 
     player1Values = [player_GP, player_PA, player_AB, player_Runs, player_Hits, player_Doubles, player_Triples, 
         player_HR, player_RBI, player_SB, player_CS, player_Walks, player_Strikeouts, player_HAB]
+    
     player2Values = [AVG_GP, AVG_PA, AVG_AB, AVG_Runs, AVG_Hits, AVG_Doubles, AVG_Triples, 
         AVG_HR, AVG_RBI, AVG_SB, AVG_CS, AVG_Walks, AVG_Strikeouts, AVG_HAB]
 
@@ -273,6 +280,48 @@ dropdown.addEventListener("change", function() {
                             "Runs", "Hits", "Doubles", "Triples", "Home Runs",
                             "Runs Batted In", "Stolen Bases", "Caught Stealing", "Walks",
                             "Strikeouts", "Hits at Bats"];
+    
+      
+                            
+    function removePlayerCard() {
+      // Select the SVG element containing the bar graph
+      const svg = d3.select('#player-stats-list');
+
+      // empty the bar graph SVG
+      svg.selectAll('*').remove();
+    }
+
+    // Call removeBarGraph to remove any existing bar graph before a new one is generated
+    removePlayerCard();
+
+    var this_player_name = document.getElementById('player-name');
+    this_player_name.textContent = player_Name
+
+    var this_player_age = document.getElementById('player-age');
+    this_player_age.textContent = playerRow[2]
+
+    var this_player_team = document.getElementById('player-team');
+    this_player_team.textContent = player_Team
+
+    var myList = document.getElementById("player-stats-list");
+
+    let attr_drop = document.getElementById("attribute-dropdown");
+    var attr = attr_drop.value;
+    console.log(attr)
+
+    for (var i = 0; i < player1Values.length; i++) {
+      if (statsToCompare[i] == attr) {
+        var listItem = document.createElement("strong");
+        listItem.textContent = statsToCompare[i] + ": " + player1Values[i];
+      }
+      else {
+        var listItem = document.createElement("li");
+        listItem.innerText = statsToCompare[i] + ": " + player1Values[i];
+      }
+      myList.appendChild(listItem);
+    }
+
+    console.log(myList);
 
     // Set up the bar graph
     const margin = { top: 20, right: 20, bottom: 100, left: 100 };

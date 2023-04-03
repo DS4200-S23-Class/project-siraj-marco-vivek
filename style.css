@@ -2,6 +2,22 @@
   font: arial
 }
 
+#bold-stat {
+  font-weight: bold ;
+}
+
+#descriptor, #player-team {
+  display: inline-block;
+  /* or display: inline; */
+  margin: 0; /* remove default margin */
+}
+
+#descriptor-2, #player-age {
+  display: inline-block;
+  /* or display: inline; */
+  margin: 0; /* remove default margin */
+}
+
 head {
 font-family: arial;
 }
@@ -73,6 +89,7 @@ font-family: arial;
 }
 
 #secondary {
+  display: flex;
   height: 65%;
   object-fit: contain;
   background-color: rgb(65, 106, 38);
