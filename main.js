@@ -331,12 +331,12 @@ function sortDataAndLogTopPlayers(category) {
   /// now just have to get index of selected category
   const item = category;
   const index = data[0].indexOf(item);
+  console.log(index);
   
-  const lastIndex = data.length - 2;
-  data.slice(0, lastIndex).sort((a, b) => {
+  data.sort((a, b) => {
     return b[index] - a[index];
   }); // sort in descending order
-
+  
 
   const topPlayers = data.slice(1, 6).map(player => player[1]);
   
