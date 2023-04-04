@@ -488,8 +488,10 @@ attribute.addEventListener("change", function() {
             let selectedText = player_name.options[player_name.selectedIndex].text;
             let computedStyle = getComputedStyle(bar);
             let height = computedStyle.getPropertyValue('height');
-            console.log(height);
-            TOOLTIP.html("Player: " + selectedText + "<br>height: " + height)
+            let heightNumeric = parseFloat(height);
+            console.log(heightNumeric)
+
+            TOOLTIP.html(selectedText + ":<br> " + (1.25 * heightNumeric))
                     .style("left", (event.pageX + 10) + "px") //add offset from mouse
                     .style("top", (event.pageY - 50) + "px"); 
         }
@@ -513,8 +515,9 @@ attribute.addEventListener("change", function() {
           const bar = event.target;
           let computedStyle = getComputedStyle(bar);
           let height = computedStyle.getPropertyValue('height');
-          console.log(height);
-          TOOLTIP.html("MLB Average: " + height)
+          let numericHeight = parseFloat(height);
+
+          TOOLTIP.html("MLB Average:<br> " + (1.25 * numericHeight))
                   .style("left", (event.pageX + 10) + "px") //add offset from mouse
                   .style("top", (event.pageY - 50) + "px"); 
       }
