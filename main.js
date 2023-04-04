@@ -25,10 +25,11 @@ d3.csv(csvFilePath).then((data) => {
   .attr("fill", "orange"); 
 
   svg.append("text")
-  .attr("x", "150")
+  .attr("x", "155")
   .attr("y", "175")
-  .attr("font-size", 24)
+  .attr("font-size", 20)
   .attr("fill", "black")
+  .attr("text-align", "center")
   .text("100%");
   
   svg.append("path")
@@ -80,11 +81,11 @@ d3.csv(csvFilePath).then((data) => {
       width: 2
     },
     to: {
-      color: "#0099ff",
+      color: "#005EB8",
       width: 10
     },
     strokeWidth: 4,
-    easing: "easeInOut",
+    easing: "easeOut",
     step: (state, shape) => {
       shape.path.setAttribute("stroke", state.color);
       shape.path.setAttribute("stroke-width", state.width);
