@@ -345,27 +345,24 @@ dropdown.addEventListener("change", function() {
 
     console.log(myList);
     
-    // read in your CSV file and parse it into an array of objects
 // each object should represent a player and their statistics
 
 // sort the data based on the selected category and log the top 5 player names
 function sortDataAndLogTopPlayers(category) {
-  /// now just have to get index of selected category
+  /// sets the category and gets the index of the selection
   const item = category;
   const index = data[0].indexOf(item);
   console.log(index);
-  const lastIndex = data.length - 1;
-
-  
+// sorts data based on the selected category
   data.sort((a, b) => {
     return b[index] - a[index];
   }); // sort in descending order
 
-
+// forms list of the top 5 players' names
   const topPlayers = data.slice(1, 6).map(player => player[1]);
 
   
-
+// updates divs with the top players from the list
     for (let i = 0; i < topPlayers.length; i++) {
       const playerDiv = document.getElementById(`player${i+1}`);
       playerDiv.textContent = `${i+1}. ${topPlayers[i]}`;
@@ -487,6 +484,7 @@ attribute.addEventListener("change", function() {
             let player_name = document.getElementById("name-dropdown");
             let selectedText = player_name.options[player_name.selectedIndex].text;
             let computedStyle = getComputedStyle(bar);
+            // returns original value rather than adjusted for height
             let height = computedStyle.getPropertyValue('height');
             let heightNumeric = parseFloat(height);
             console.log(heightNumeric)
