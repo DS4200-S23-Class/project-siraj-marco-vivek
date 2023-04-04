@@ -74,9 +74,14 @@ font-family: arial;
 #diamond {
   flex: 1;
   width: 60%;
-  padding-right: 10px;
-  object-fit: contain;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: rgb(84, 140, 47);
+}
+
+#diamond_animate {
+  position: center;
 }
 
 #details {
