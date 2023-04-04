@@ -1,5 +1,5 @@
 * {
-  font: arial
+  font-family: 'Optima';
 }
 
 #bold-stat {
@@ -144,6 +144,7 @@ font-family: arial;
 
 #player-stats-list {
   color: white;
+  font-size: 13px;
 }
 
 .bar1 {

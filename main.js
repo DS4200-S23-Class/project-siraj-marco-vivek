@@ -253,7 +253,15 @@ dropdown.addEventListener("change", function() {
     player_CS = playerRow[15];
     player_Walks = playerRow[16];
     player_Strikeouts = playerRow[17];
-    player_HAB = playerRow[18];
+    player_OBS = playerRow[21];
+    player_OPS = playerRow[22];
+    player_TotalBases = playerRow[23];
+    player_DPGI = playerRow[24];
+    player_HBP = playerRow[25];
+    player_SH = playerRow[26];
+    player_SFO = playerRow[27];
+    player_IW = playerRow[28];
+
 
     // MLB_AVG values -- MLB AVG is hard encoded as a "player" in the .csv at index 790
     AVG_GP = MLB_AVG[5];
@@ -269,18 +277,30 @@ dropdown.addEventListener("change", function() {
     AVG_CS = MLB_AVG[15];
     AVG_Walks = MLB_AVG[16];
     AVG_Strikeouts = MLB_AVG[17];
-    AVG_HAB = MLB_AVG[18];
-
+    AVG_OBS = playerRow[21];
+    AVG_OPS = playerRow[22];
+    AVG_TotalBases = playerRow[23];
+    AVG_DPGI = playerRow[24];
+    AVG_HBP = playerRow[25];
+    AVG_SH = playerRow[26];
+    AVG_SFO = playerRow[27];
+    AVG_IW = playerRow[28];
+    
     player1Values = [player_GP, player_PA, player_AB, player_Runs, player_Hits, player_Doubles, player_Triples, 
-        player_HR, player_RBI, player_SB, player_CS, player_Walks, player_Strikeouts, player_HAB]
+        player_HR, player_RBI, player_SB, player_CS, player_Walks, player_Strikeouts, player_OBS,
+        player_OPS, player_TotalBases, player_DPGI, player_HBP, player_SH, player_SFO, player_IW]
     
     player2Values = [AVG_GP, AVG_PA, AVG_AB, AVG_Runs, AVG_Hits, AVG_Doubles, AVG_Triples, 
-        AVG_HR, AVG_RBI, AVG_SB, AVG_CS, AVG_Walks, AVG_Strikeouts, AVG_HAB]
+        AVG_HR, AVG_RBI, AVG_SB, AVG_CS, AVG_Walks, AVG_Strikeouts, AVG_OBS,
+        AVG_OPS, AVG_TotalBases, AVG_DPGI, AVG_HBP, AVG_SH, AVG_SFO, AVG_IW]
 
     const statsToCompare = ["Games Played", "Plate Appearances", "At Bats",
                             "Runs", "Hits", "Doubles", "Triples", "Home Runs",
                             "Runs Batted In", "Stolen Bases", "Caught Stealing", "Walks",
-                            "Strikeouts", "Hits at Bats"];
+                            "Strikeouts", "Hits at Bats", "On Base Percentage" ,
+                            "Slugging" , "On Base and Slugging" , "OPS" , "Total Bases",
+                            "Double Plays Grounded Into", "Hit By Pitch", "Sacrifice Hits", 
+                            "Sacrifice Fly Outs", "Intentional Walks"];
     
       
                             
@@ -320,6 +340,7 @@ dropdown.addEventListener("change", function() {
         listItem.innerText = statsToCompare[i] + ": " + player1Values[i];
       }
       myList.appendChild(listItem);
+      
     }
 
     console.log(myList);
@@ -352,11 +373,7 @@ function sortDataAndLogTopPlayers(category) {
     spaces = category.replace(/_/g, " ")
 
     const text = document.getElementById(`dugout_text`);
-    text.innerHTML = `Leaders for ${spaces} in the 2022 season`;
-
-
-
-    
+    text.innerHTML = `Leaders for ${spaces} in the 2022 season`;  
   
 }
 
@@ -399,7 +416,13 @@ attribute.addEventListener("change", function() {
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     // Set the domain for the x scale
-    x.domain(statsToCompare);
+     x.domain(statsToCompare);
+
+    const xScale = d3.scaleBand()
+  .domain(statsToCompare)
+  .range([0, width])
+  .paddingInner(0.1)
+  .paddingOuter(0.1);
 
     // Set the domain for the y scale
     const maxValue = 600;
@@ -408,8 +431,13 @@ attribute.addEventListener("change", function() {
     // Add the x axis
     svg.append("g")
         .attr("class", "x axis")
-        .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x));
+        .attr("transform", "translate(0," + height + ")") 
+        .call(d3.axisBottom(x))
+        .selectAll('text') // select all the x-axis labels
+        .style('text-anchor', 'end')
+        .attr('dx', '-.8em')
+        .attr('dy', '.15em')
+        .attr('transform', 'rotate(-90)');
 
     // Add the y axis
     svg.append("g")
@@ -501,9 +529,10 @@ attribute.addEventListener("change", function() {
         .data(player1Values)
         .enter().append("rect")
         .attr("class", "bar1")
-        .attr("x", function(d, i) { return x(statsToCompare[i]); })
+        .attr('x', (d, i) => xScale(statsToCompare[i]))
+        //.attr("x", function(d, i) { return x(statsToCompare[i]); })
         .attr("y", function(d) { return y(d); })
-        .attr("width", x.bandwidth() / 2)
+        .attr("width", xScale.bandwidth() / 2)
         .attr("height", function(d) { return height - y(d); })
         .on("mouseover", handleMouseover) //add event listeners
                 .on("mousemove", handleMousemove)
@@ -515,7 +544,8 @@ attribute.addEventListener("change", function() {
         .data(player2Values)
         .enter().append("rect")
         .attr("class", "bar2")
-        .attr("x", function(d, i) { return x(statsToCompare[i]) + x.bandwidth() / 2; })
+        .attr('x', (d, i) => xScale(statsToCompare[i]) + x.bandwidth()/2)
+        //.attr("x", function(d, i) { return x(statsToCompare[i]) + x.bandwidth() / 2; })
         .attr("y", function(d) { return y(d); })
         .attr("width", x.bandwidth() / 2)
         .attr("height", function(d) { return height - y(d); })
@@ -523,7 +553,32 @@ attribute.addEventListener("change", function() {
         .on("mousemove", handleMousemove2)
         .on("mouseleave", handleMouseleave2);
 
-      
+    const legendData = [
+      { name: player_Name, color: 'steelblue' },
+      { name: 'Average MLB Player', color: 'lightsalmon' },
+    ];
+
+    const legend = svg.append('g')
+      .attr('class', 'legend')
+      .attr('transform', 'translate(150 ,50)'); // position the legend
+
+    const legendRects = legend.selectAll('rect')
+      .data(legendData)
+      .enter()
+      .append('rect')
+      .attr('x', 0)
+      .attr('y', (d, i) => i * 20) // position the rect vertically
+      .attr('width', 18)
+      .attr('height', 18)
+      .attr('fill', d => d.color);
+
+    const legendLabels = legend.selectAll('text')
+      .data(legendData)
+      .enter()
+      .append('text')
+      .attr('x', 24)
+      .attr('y', (d, i) => i * 20 + 9) // position the label vertically
+      .text(d => d.name);
 
     }
   };
