@@ -1,8 +1,10 @@
 // Define the CSV file location
 let csvFilePath = 'cleaned_baseball_data.csv';
+let imgcsvFilePath = 'name_src.csv'
 
 // Prints first 10 lines of CSV to console
-console.log("First 10 rows of data file:")
+console.log("First 10 rows of data file:");
+
 
 d3.csv(csvFilePath).then((data) => {
   
@@ -98,6 +100,7 @@ d3.csv(csvFilePath).then((data) => {
   // Create dropdown for attribute
   let att_drop = document.getElementById("attribute-dropdown");
   let cols = data.columns;
+
   cols.forEach(col => {
           const option = document.createElement("option");
           option.text = col;
@@ -110,11 +113,30 @@ d3.csv(csvFilePath).then((data) => {
 
     let attr_drop = document.getElementById("attribute-dropdown");
     let player_drop = document.getElementById("name-dropdown");
+    let img= document.getElementById("player-headshot");
 
     function update_diamond(){
 
         let attr = attr_drop.value;
         let name = player_drop.value;
+        let link = img.getAttribute("src");
+
+        console.log(link)
+
+        if (name.length != 0) {
+          d3.csv(imgcsvFilePath, {encoding: "utf-8"}).then((data) => {
+
+            // Get the first value of the column
+            let src_list = data[0]
+            let src = name.replace(/\xa0/g, ' ')
+            
+            // link to headshot
+            url = src_list[src]
+            
+            // update headshot
+            img.setAttribute('src', url)
+          })
+        }        
 
         if (attr.length != 0 && name.length != 0){
           // Find the index of the player by name
