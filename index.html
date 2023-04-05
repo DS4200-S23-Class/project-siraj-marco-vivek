@@ -59,14 +59,17 @@
     <div>
         <div class = "vis">
             <h2>Visualization</h2>
-    
+            <p class="instructions">Select a player: see their stat card and performance compared to MLB averages in the below bar graph.</p>
+            <p class="instructions">Select a statistical category: see MLB's leaders for that statistic in the dugout.</p>
+            <p class="instructions">Selecting both fields: that player's progress toward the single-season MLB record populates on the diamond.</p>
             <div id="encompass">
                 <div id="details">
                     <div id="statselector">
-                        <p class = "text">Choose an MLB Player below! </p>
+                        <p class = "text">Select a player:</p>
                         <select id="name-dropdown">
                             <option value="">--Please select a name--</option>
                         </select>
+                        <p class= "text">Select a statistical category:</p>
                         <select id="attribute-dropdown">
                             <option value="">--Please select a attribute--</option>
                         </select>
@@ -82,14 +85,15 @@
                                 <p id="descriptor">Team: </p> <p id="player-team"></p>
                                 <br>
                                 <br>
-                                <img id="player-headshot" src="/headshot.png" alt="headshot sample" width="120" height="150" />  
+                                <img id="player-headshot" src="/headshot.png" alt="headshot sample" width="232" height="232" />  
                             </div>
                         </div>
                         <ul id="player-stats-list"></ul>
                     </div>
-                    
-                </div>
+                </div>    
                 <div id="diamond">
+                    <h3 id="diamond-header"></h3>
+                    <p id="diamond-descriptor">Each base represents 25% of the single-season MLB all-time record for the statistic selected.</p>
                 </div>
                 
             </div>

@@ -97,6 +97,15 @@ d3.csv(csvFilePath).then((data) => {
   // update the percent by change the value here
   path.animate(0.25);
 
+  // Define the header for the diamond
+  const message =  "[Selected player]'s progress toward a historic MLB performance in [selected statistic]";
+  
+  // Select the <h3> element on the page
+  const output = document.querySelector("#diamond-header");
+  
+  // Set the text content of the <h3> element to the value of the string variable
+  output.textContent = message; 
+
   // Create dropdown for attribute
   let att_drop = document.getElementById("attribute-dropdown");
   let cols = data.columns;
@@ -172,6 +181,16 @@ d3.csv(csvFilePath).then((data) => {
               txt.text(i.toString() + "%");
             }}, 80
             )};
+
+            // Define the header for the diamond
+            const message = name + "'s progress toward a historic MLB performance in " + attr;
+  
+            // Select the <h3> element on the page
+            const output = document.querySelector("#diamond-header");
+  
+            // Set the text content of the <h3> element to the value of the string variable
+            output.textContent = message; 
+
 
           iterateNumbers(number, percent);
           path.animate(percent/100);
