@@ -79,11 +79,11 @@ d3.csv(csvFilePath).then((data) => {
   let path = new ProgressBar.Path("#diamond_", {
     duration: 6000,
     from: {
-      color: "#ff0000",
-      width: 2
+      color: "#FF0000",
+      width: 6
     },
     to: {
-      color: "#005EB8",
+      color: "#00ff00",
       width: 10
     },
     strokeWidth: 4,
@@ -95,7 +95,7 @@ d3.csv(csvFilePath).then((data) => {
   });
   
   // update the percent by change the value here
-  path.animate(1);
+  path.animate(0.25);
 
   // Create dropdown for attribute
   let att_drop = document.getElementById("attribute-dropdown");
@@ -124,7 +124,7 @@ d3.csv(csvFilePath).then((data) => {
         console.log(link)
 
         if (name.length != 0) {
-          d3.csv(imgcsvFilePath, {encoding: "utf-8"}).then((data) => {
+          d3.csv(imgcsvFilePath).then((data) => {
 
             // Get the first value of the column
             let src_list = data[0]

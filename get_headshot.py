@@ -26,11 +26,12 @@ from collections import defaultdict
 player = pd.read_csv('cleaned_baseball_data.csv')
 names = [i.replace('\xa0', ' ') for i in player['Name'][:789]]
 name_src = defaultdict(lambda: "")
+i = 0
 
 def get_headshot(name):
     options = webdriver.ChromeOptions()
-    #options.add_argument('--headless')
-    options.add_argument('--disable-extensions')
+    options.add_argument('--headless')
+    """options.add_argument('--disable-extensions')
     options.add_argument('--disable-infobars')
     options.add_argument('--disable-plugins-discovery')
     options.add_argument('--disable-blink-features=AutomationControlled')
@@ -44,7 +45,7 @@ def get_headshot(name):
     options.add_argument('--disable-site-isolation-trials')
     options.add_argument('--disable-features=IsolateOrigins,site-per-process')
     options.add_argument('--incognito')
-    options.add_argument('--disable-cookies')
+    options.add_argument('--disable-cookies')"""
 
     url = 'https://www.mlb.com/players'
 
@@ -54,28 +55,28 @@ def get_headshot(name):
 
     driver.get(url)
 
-    time.sleep(2)
+    #time.sleep(1)
 
-    try:
-        cookie = driver.find_element(By.ID, 'onetrust-accept-btn-handler')
-        cookie.click()
-    except:
-        pass
+    #try:
+        #cookie = driver.find_element(By.ID, 'onetrust-accept-btn-handler')
+        #cookie.click()
+    #except:
+        #pass
 
     try:
         player_info = driver.find_element(By.PARTIAL_LINK_TEXT, name)
 
         player_info.click()
 
-        head_shot = driver.find_element(By.CLASS_NAME, 'player-headshot')
+        bg = driver.find_element(By.CLASS_NAME, 'player-header')
 
-        link = head_shot.get_attribute('src')
+        link = bg.get_attribute('data-img-x')
     except:
-        link = '/headshot.png'
+        link = 'none'
 
     name_src[name] = link
 
-    print("success!")
+    print(f'{i + 1} /789')
     driver.close()
 
 for name in names:
@@ -83,4 +84,4 @@ for name in names:
 
 df = pd.DataFrame([name_src])
 
-df.to_csv('name_src.csv', index=False)
+df.to_csv('bg_src.csv', index=False)

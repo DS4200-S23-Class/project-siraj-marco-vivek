@@ -78,6 +78,11 @@ font-family: arial;
   justify-content: center;
   align-items: center;
   background-color: rgb(84, 140, 47);
+  background-image: url("https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:action:hero:current.jpg/q_auto:good,w_1500/v1/people/547989/action/hero/current");
+  height: 100%;
+  width: 100%;
+  opacity: 0.7;
+  background-repeat: no-repeat;
 }
 
 #diamond_animate {
