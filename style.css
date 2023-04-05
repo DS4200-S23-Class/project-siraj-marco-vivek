@@ -67,17 +67,29 @@ font-family: arial;
   flex-direction: row;
   object-fit: contain;
   background-color: plum;
-  height:450px;
+  height: 522px;
 
+}
+
+#statselector {
+  background-color: burlywood;
 }
 
 #diamond {
   flex: 1;
   width: 60%;
-  display: flex;
+  display: block;
   justify-content: center;
   align-items: center;
   background-color: rgb(84, 140, 47);
+}
+
+#diamond-header {
+  display: block;
+}
+
+#diamond-descriptor {
+  display: block;
 }
 
 #diamond_animate {
@@ -137,9 +149,18 @@ font-family: arial;
 
 }
 
+.instructions {
+  color: darkslategray;
+  text-align: center;
+}
+
 .content {
   color: white;
 
+}
+
+#card {
+  color:teal;
 }
 
 #player-stats-list {
