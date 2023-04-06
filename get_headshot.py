@@ -26,32 +26,30 @@ from collections import defaultdict
 player = pd.read_csv('cleaned_baseball_data.csv')
 names = [i.replace('\xa0', ' ') for i in player['Name'][:789]]
 name_src = defaultdict(lambda: "")
-i = 0
 
-def get_headshot(name):
-    options = webdriver.ChromeOptions()
-    options.add_argument('--headless')
-    """options.add_argument('--disable-extensions')
-    options.add_argument('--disable-infobars')
-    options.add_argument('--disable-plugins-discovery')
-    options.add_argument('--disable-blink-features=AutomationControlled')
-    options.add_argument('--disable-dev-shm-usage')
-    options.add_argument('--no-sandbox')
-    options.add_argument('--disable-gpu')
-    options.add_argument('--disable-setuid-sandbox')
-    options.add_argument('--disable-popup-blocking')
-    options.add_argument('--ignore-certificate-errors')
-    options.add_argument('--disable-web-security')
-    options.add_argument('--disable-site-isolation-trials')
-    options.add_argument('--disable-features=IsolateOrigins,site-per-process')
-    options.add_argument('--incognito')
-    options.add_argument('--disable-cookies')"""
+url = 'https://www.mlb.com/players'
 
-    url = 'https://www.mlb.com/players'
+chromedriver_path = 'C:\\Users\\ChenXi\\Desktop\\DS4200\\project-siraj-marco-vivek\\chromedriver.exe'
+options = webdriver.ChromeOptions()
+options.add_argument('--headless')
+driver = webdriver.Chrome(executable_path=chromedriver_path, options=options)
 
-    chromedriver_path = 'C:\\Users\\ChenXi\\Desktop\\DS4200\\project-siraj-marco-vivek\\chromedriver.exe'
-
-    driver = webdriver.Chrome(executable_path=chromedriver_path, options=options)
+def get_headshot(name, driver, url, i):
+    #options.add_argument('--disable-extensions')
+    #options.add_argument('--disable-infobars')
+    #options.add_argument('--disable-plugins-discovery')
+    #options.add_argument('--disable-blink-features=AutomationControlled')
+    #options.add_argument('--disable-dev-shm-usage')
+    #options.add_argument('--no-sandbox')
+    #options.add_argument('--disable-gpu')
+    #options.add_argument('--disable-setuid-sandbox')
+    #options.add_argument('--disable-popup-blocking')
+    #options.add_argument('--ignore-certificate-errors')
+    #options.add_argument('--disable-web-security')
+    #options.add_argument('--disable-site-isolation-trials')
+    #options.add_argument('--disable-features=IsolateOrigins,site-per-process')
+    #options.add_argument('--incognito')
+    #options.add_argument('--disable-cookies')
 
     driver.get(url)
 
@@ -64,23 +62,29 @@ def get_headshot(name):
         #pass
 
     try:
+
         player_info = driver.find_element(By.PARTIAL_LINK_TEXT, name)
 
         player_info.click()
 
-        bg = driver.find_element(By.CLASS_NAME, 'player-header')
+        time.sleep(1)
+
+        bg = driver.find_element(By.XPATH, '/html/body/main/section/header')
 
         link = bg.get_attribute('data-img-x')
+
+        print(link)
+
     except:
         link = 'none'
 
     name_src[name] = link
 
-    print(f'{i + 1} /789')
-    driver.close()
+    print(f'{i} /789')
 
-for name in names:
-    get_headshot(name)
+#name_l = ['CJ Abrams']
+for i in range(len(names)):
+    get_headshot(names[i], driver, url, i)
 
 df = pd.DataFrame([name_src])
 

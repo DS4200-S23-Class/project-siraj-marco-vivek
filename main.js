@@ -1,6 +1,7 @@
 // Define the CSV file location
 let csvFilePath = 'cleaned_baseball_data.csv';
 let imgcsvFilePath = 'name_src.csv'
+let bgcsvFilePath = 'bg_src.csv'
 
 // Prints first 10 lines of CSV to console
 console.log("First 10 rows of data file:");
@@ -13,7 +14,7 @@ d3.csv(csvFilePath).then((data) => {
   .append("svg")
   .attr("id", "diamond_animate")
   .attr("width", "600")
-  .attr("height", "350")
+  .attr("height", "400")
   .attr("version", "1.1")
   .attr("x", "0")
   .attr("y", "0")
@@ -21,70 +22,69 @@ d3.csv(csvFilePath).then((data) => {
 
    svg.append("circle")
   .attr("id", "center")
-  .attr("cy", "165")
-  .attr("cx", "180")
+  .attr("cy", "175")
+  .attr("cx", "205")
   .attr("r", "30")
   .attr("fill", "orange"); 
 
   svg.append("text")
-  .attr("x", "155")
-  .attr("y", "175")
+  .attr("x", "180")
+  .attr("y", "180")
   .attr("font-size", 20)
   .attr("fill", "black")
-  .attr("text-align", "center")
   .text("100%");
   
   svg.append("path")
-  .attr("d", "M 180 300 L 310 120 L 180 50 L 50 120z")
+  .attr("d", "M 200 330 L 350 180 L 200 30 L 50 180z")
   .attr("fill", "none")
   .attr("stroke", "#ddd")
-  .attr("stroke-width", "1");
+  .attr("stroke-width", "5");
 
   svg.append("path")
   .attr("id", "diamond_")
-  .attr("d", "M 180 300 L 310 120 L 180 50 L 50 120z")
+  .attr("d", "M 200 330 L 350 180 L 200 30 L 50 180z")
   .attr("fill", "none")
   .attr("stroke", "red")
   .attr("stoke-width", "5");
 
   svg.append("circle")
   .attr("id", "base")
-  .attr("cy", "300")
-  .attr("cx", "180")
+  .attr("cy", "330")
+  .attr("cx", "200")
   .attr("r", "20")
-  .attr("fill", "white");
+  .attr("fill", "black");
 
   svg.append("circle")
   .attr("id", "base")
-  .attr("cy", "120")
+  .attr("cy", "180")
+  .attr("cx", "350")
+  .attr("r", "20")
+  .attr("fill", "black");
+
+  svg.append("circle")
+  .attr("id", "base")
+  .attr("cy", "30")
+  .attr("cx", "200")
+  .attr("r", "20")
+  .attr("fill", "black");
+
+  svg.append("circle")
+  .attr("id", "base")
+  .attr("cy", "180")
   .attr("cx", "50")
   .attr("r", "20")
-  .attr("fill", "white");
-
-  svg.append("circle")
-  .attr("id", "base")
-  .attr("cy", "50")
-  .attr("cx", "180")
-  .attr("r", "20")
-  .attr("fill", "white");
-
-  svg.append("circle")
-  .attr("id", "base")
-  .attr("cy", "120")
-  .attr("cx", "310")
-  .attr("r", "20")
-  .attr("fill", "white");
+  .attr("fill", "black");
 
 
   let path = new ProgressBar.Path("#diamond_", {
     duration: 6000,
     from: {
       color: "#FF0000",
-      width: 6
+      width: 8
     },
     to: {
       color: "#00ff00",
-      width: 10
+      width: 15
     },
     strokeWidth: 4,
     easing: "easeOut",
@@ -95,7 +95,7 @@ d3.csv(csvFilePath).then((data) => {
   });
   
   // update the percent by change the value here
-  path.animate(0.25);
+  path.animate(1);
 
   // Define the header for the diamond
   const message =  "[Selected player]'s progress toward a historic MLB performance in [selected statistic]";
@@ -123,6 +123,7 @@ d3.csv(csvFilePath).then((data) => {
     let attr_drop = document.getElementById("attribute-dropdown");
     let player_drop = document.getElementById("name-dropdown");
     let img= document.getElementById("player-headshot");
+    let bg = document.getElementById("diamond");
 
     function update_diamond(){
 
@@ -144,6 +145,20 @@ d3.csv(csvFilePath).then((data) => {
             
             // update headshot
             img.setAttribute('src', url)
+          })
+
+          d3.csv(bgcsvFilePath).then((data) => {
+
+            // Get the first value of the column
+            let src_list = data[0]
+            let src = name.replace(/\xa0/g, ' ')
+            
+            // link to headshot
+            url = src_list[src]
+            
+            // update headshot
+            bg.style.backgroundImage =  "url(" + url + ")"
+            bg.style.backgroundPosition = "center center"
           })
         }        
 
@@ -208,7 +223,7 @@ Papa.parse(csvFilePath, {
     header: true,
     complete: function(results) {
       // Get the column headers from the parsed CSV
-      const headers = results.meta.fields.slice(6);
+      const headers = results.meta.fields.slice(5);
     
       // Fetch the dropdown element
       const dropdown = document.getElementById("attribute-dropdown");

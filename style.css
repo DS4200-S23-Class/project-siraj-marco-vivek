@@ -77,15 +77,16 @@ font-family: arial;
 
 #diamond {
   flex: 1;
-  width: 60%;
+  width: 70%;
+  height: 100%;
   display: block;
   justify-content: center;
   align-items: center;
-  background-color: rgb(84, 140, 47);
-  background-image: url("https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:action:hero:current.jpg/q_auto:good,w_1500/v1/people/547989/action/hero/current");
+  background-color: rgb(144, 140, 47);
+  background-image: none;
   height: 100%;
   width: 100%;
-  opacity: 0.7;
+  opacity: 0.6;
   background-repeat: no-repeat;
 }
 
