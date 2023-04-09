@@ -508,8 +508,8 @@ attribute.addEventListener("change", function() {
       .attr("class", "x label")
       .attr("text-anchor", "end")
       .attr("x", width/2 + 40)
-      .attr("y", height + 40)
-      .text("Statistical Cateogry");
+      .attr("y", height + 95)
+      .text("Statistical Category");
 
     svg.append("text")
       .attr("class", "y label")
