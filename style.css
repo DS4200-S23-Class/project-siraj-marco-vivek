@@ -82,12 +82,20 @@ font-family: arial;
   display: block;
   justify-content: center;
   align-items: center;
-  background-color: rgb(144, 140, 47);
-  background-image: none;
-  height: 100%;
+  position: relative;
+  background-color: rgb(144, 144, 144);
+}
+
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  opacity: 0.6;
-  background-repeat: no-repeat;
+  height: 100%;
+  background-image: none;
+  background-size: cover;
+  opacity: 0.5;
+  z-index: 1;
 }
 
 #diamond-header {
@@ -190,3 +198,4 @@ font-family: arial;
   border-radius: 5px;
   padding: 5px;
 }
+

@@ -18,62 +18,89 @@ d3.csv(csvFilePath).then((data) => {
   .attr("version", "1.1")
   .attr("x", "0")
   .attr("y", "0")
-  .attr("viewBox", "0 0 300 350");
+  .attr("viewBox", "0 0 300 350")
+  .attr("position", "absolute")
+  .attr("z-index", '3')
+  .attr("opacity", "1");
 
    svg.append("circle")
   .attr("id", "center")
   .attr("cy", "175")
   .attr("cx", "205")
   .attr("r", "30")
-  .attr("fill", "orange"); 
+  .attr("fill", "orange")
+  .attr("position", "absolute")
+  .attr("z-index", '5')
+  .attr("opacity", "1"); 
 
   svg.append("text")
   .attr("x", "180")
   .attr("y", "180")
   .attr("font-size", 20)
   .attr("fill", "black")
-  .text("100%");
+  .text("100%")
+  .attr("position", "absolute")
+  .attr("z-index", '2')
+  .attr("opacity", "1");
   
   svg.append("path")
   .attr("d", "M 200 330 L 350 180 L 200 30 L 50 180z")
   .attr("fill", "none")
   .attr("stroke", "#ddd")
-  .attr("stroke-width", "5");
+  .attr("stroke-width", "5")
+  .attr("position", "absolute")
+  .attr("z-index", '5')
+  .attr("opacity", "1");
 
   svg.append("path")
   .attr("id", "diamond_")
   .attr("d", "M 200 330 L 350 180 L 200 30 L 50 180z")
   .attr("fill", "none")
   .attr("stroke", "red")
-  .attr("stoke-width", "5");
+  .attr("stoke-width", "5")
+  .attr("position", "absolute")
+  .attr("z-index", '5')
+  .attr("opacity", "1");
 
   svg.append("circle")
   .attr("id", "base")
   .attr("cy", "330")
   .attr("cx", "200")
   .attr("r", "20")
-  .attr("fill", "black");
+  .attr("fill", "black")
+  .attr("position", "absolute")
+  .attr("z-index", '5')
+  .attr("opacity", "1");
 
   svg.append("circle")
   .attr("id", "base")
   .attr("cy", "180")
   .attr("cx", "350")
   .attr("r", "20")
-  .attr("fill", "black");
+  .attr("fill", "black")
+  .attr("position", "absolute")
+  .attr("z-index", '5')
+  .attr("opacity", "1");
 
   svg.append("circle")
   .attr("id", "base")
   .attr("cy", "30")
   .attr("cx", "200")
   .attr("r", "20")
-  .attr("fill", "black");
+  .attr("fill", "black")
+  .attr("position", "absolute")
+  .attr("z-index", '5')
+  .attr("opacity", "1");
 
   svg.append("circle")
   .attr("id", "base")
   .attr("cy", "180")
   .attr("cx", "50")
   .attr("r", "20")
-  .attr("fill", "black");
+  .attr("fill", "black")
+  .attr("position", "absolute")
+  .attr("z-index", '5')
+  .attr("opacity", "1");
 
 
   let path = new ProgressBar.Path("#diamond_", {
@@ -108,7 +135,7 @@ d3.csv(csvFilePath).then((data) => {
 
   // Create dropdown for attribute
   let att_drop = document.getElementById("attribute-dropdown");
-  let cols = data.columns;
+  let cols = data.columns.slice(5);
 
   cols.forEach(col => {
           const option = document.createElement("option");
@@ -123,7 +150,7 @@ d3.csv(csvFilePath).then((data) => {
     let attr_drop = document.getElementById("attribute-dropdown");
     let player_drop = document.getElementById("name-dropdown");
     let img= document.getElementById("player-headshot");
-    let bg = document.getElementById("diamond");
+    let bg = document.getElementById("background-image");
 
     function update_diamond(){
 
@@ -159,6 +186,8 @@ d3.csv(csvFilePath).then((data) => {
             // update headshot
             bg.style.backgroundImage =  "url(" + url + ")"
             bg.style.backgroundPosition = "center center"
+            bg.style.zIndex = "0"
+            bg.style.opacity = "0.3"
           })
         }        
 
