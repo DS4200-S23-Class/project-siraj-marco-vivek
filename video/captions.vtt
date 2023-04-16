@@ -1,0 +1,64 @@
+WEBVTT
+Kind: captions
+Language: en-US
+
+00:00:00.000 --> 00:00:07.000
+Hi, welcome to the mvp race: MLB player statistics in the 2022 season. 
+
+00:00:07.315 --> 00:00:13.101
+The very first thing you can see is the introduction and background information of our website.
+
+00:00:14.045 --> 00:00:16.822
+You can scroll down to enter the visualization part.
+
+00:00:19.547 --> 00:00:25.193
+Which is consisting with four sub-parts, on the top left, we have player profile.
+
+00:00:25.193 --> 00:00:27.916
+on the top right, we have the diamond progress bar.
+
+00:00:28.573 --> 00:00:31.655
+In the middle, we have a dugout for selected attribute.
+
+00:00:31.923 --> 00:00:36.299
+At the bottom, we have bar graph that compare player to MLB average.
+
+00:00:38.125 --> 00:00:43.559
+To show the visualization, we start with the two dropdown which is above the player profile. 
+
+00:00:44.651 --> 00:00:48.832
+You are able to select a player name and a statistical category. 
+
+00:00:49.235 --> 00:00:51.397
+Let’s say we select CJ Abrams.
+
+00:00:55.307 --> 00:00:59.868
+ You are now able to see his headshot and statistics in his profile.
+
+00:01:00.690 --> 00:01:03.257
+Also, you can see the bar graph also shows up.
+
+00:01:05.155 --> 00:01:07.089
+You can hover the bar to see the value.  
+
+00:01:08.375 --> 00:01:13.888
+Don’t forget to select a attribute in the statistical category dropdown to activate the diamond and dugout. 
+
+00:01:15.584 --> 00:01:17.280
+Let’s say we choose triples.
+
+00:01:20.939 --> 00:01:22.872
+You can now see the diamond progress bar change.
+
+00:01:23.534 --> 00:01:29.756
+The value inside the circle indicates how close his triple compares to all time highest triple in MLB. 
+
+00:01:30.898 --> 00:01:35.279
+In the dugout you can also see the five highest triple in MLB.
+
+00:01:36.151 --> 00:01:38.743
+It is okay to change the player or attribute.
+
+00:01:39.624 --> 00:01:40.505
+ Enjoy !
+
