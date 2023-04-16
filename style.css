@@ -6,6 +6,12 @@
   font-weight: bold ;
 }
 
+.video {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 #descriptor, #player-team {
   display: inline-block;
   /* or display: inline; */
